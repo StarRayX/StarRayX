@@ -54,9 +54,6 @@ CLI Markdown-to-PDF converter with a hand-written tokenizer, parser, and documen
 
 ![Metrics](./github-metrics.svg)
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=StarRayX&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
-<img height="165" src="https://github-readme-streak-stats.herokuapp.com/?user=StarRayX&theme=tokyonight&hide_border=true" />
-
 </div>
 
 ## Contact
