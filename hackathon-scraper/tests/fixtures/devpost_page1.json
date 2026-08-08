@@ -1,0 +1,73 @@
+{
+  "hackathons": [
+    {
+      "id": 24101,
+      "title": "Bayanihan Build 2026",
+      "displayed_location": { "icon": "map-marker", "location": "Manila, Philippines" },
+      "open_state": "open",
+      "url": "https://bayanihan-build.devpost.com/",
+      "time_left_to_submission": "18 days left",
+      "submission_period_dates": "Feb 02 - Mar 20, 2026",
+      "themes": [{ "id": 1, "name": "Social Good" }, { "id": 7, "name": "Machine Learning/AI" }],
+      "prize_amount": "$<span data-currency-value>25,000</span>",
+      "registrations_count": 812,
+      "organization_name": "DICT Philippines",
+      "featured": true,
+      "invite_only": false
+    },
+    {
+      "id": 24102,
+      "title": "Global Agents Hack",
+      "displayed_location": { "icon": "globe", "location": "Online" },
+      "open_state": "open",
+      "url": "//global-agents.devpost.com/",
+      "time_left_to_submission": "40 days left",
+      "submission_period_dates": "Jan 15 - Apr 10, 2026",
+      "themes": [{ "id": 7, "name": "Machine Learning/AI" }],
+      "prize_amount": "$<span data-currency-value>1,000,000</span>",
+      "registrations_count": 15422,
+      "organization_name": "Big Sponsor Inc",
+      "invite_only": false
+    },
+    {
+      "id": 24103,
+      "title": "Oktoberfest Code Jam",
+      "displayed_location": { "icon": "map-marker", "location": "Munich, Germany" },
+      "open_state": "upcoming",
+      "url": "https://oktoberfest-jam.devpost.com/",
+      "time_left_to_submission": "3 months left",
+      "submission_period_dates": "Sep 01 - Oct 05, 2026",
+      "themes": [],
+      "prize_amount": "€<span data-currency-value>8,000</span>",
+      "registrations_count": 210,
+      "organization_name": "Munich Devs"
+    },
+    {
+      "id": 24104,
+      "title": "Cebu Fintech Sprint",
+      "displayed_location": { "icon": "map-marker", "location": "Cebu City" },
+      "open_state": "open",
+      "url": "https://cebu-fintech.devpost.com/",
+      "time_left_to_submission": "9 days left",
+      "submission_period_dates": "Mar 01 - Mar 11, 2026",
+      "themes": [{ "id": 3, "name": "Fintech" }],
+      "prize_amount": "₱<span data-currency-value>750,000</span>",
+      "registrations_count": 94,
+      "organization_name": "UnionBank"
+    },
+    {
+      "id": 24105,
+      "title": "Quiet Hack With No Prize",
+      "displayed_location": { "icon": "globe", "location": "Online" },
+      "open_state": "upcoming",
+      "url": "https://quiet-hack.devpost.com/",
+      "time_left_to_submission": "2 months left",
+      "submission_period_dates": "Jun 01 - Jun 30, 2026",
+      "themes": [],
+      "prize_amount": "",
+      "registrations_count": 5,
+      "organization_name": null
+    }
+  ],
+  "meta": { "total_count": 5, "per_page": 10 }
+}

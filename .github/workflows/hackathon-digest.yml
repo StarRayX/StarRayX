@@ -1,0 +1,91 @@
+name: Hackathon digest
+
+# Runs the Philippine hackathon scraper and commits a refreshed digest.
+# GitHub-hosted runners have open outbound network, so the scrape works here
+# even when a local or sandboxed environment cannot reach the sources.
+
+on:
+  schedule:
+    # 01:00 UTC Monday = 09:00 Manila, Monday.
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+    inputs:
+      min_prize:
+        description: "Minimum prize in PHP"
+        required: false
+        default: "0"
+      tiers:
+        description: "Relevance tiers (local,seasia,global)"
+        required: false
+        default: "local,seasia,global"
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: hackathon-scraper
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        working-directory: hackathon-scraper
+        run: python -m pytest
+
+      - name: Scrape and render digest
+        working-directory: hackathon-scraper
+        env:
+          MIN_PRIZE: ${{ inputs.min_prize || '0' }}
+          TIERS: ${{ inputs.tiers || 'local,seasia,global' }}
+        run: |
+          mkdir -p data
+          # Sources are third-party and can be down; a failed scrape should not
+          # fail the workflow, so the exit code is captured rather than raised.
+          set +e
+          python -m phhack scan \
+            --min-prize "$MIN_PRIZE" \
+            --tiers "$TIERS" \
+            --limit 40 \
+            --format md \
+            --out data/digest.md
+          md_status=$?
+          python -m phhack scan \
+            --min-prize "$MIN_PRIZE" \
+            --tiers "$TIERS" \
+            --limit 40 \
+            --format json \
+            --out data/hackathons.json
+          json_status=$?
+          set -e
+          echo "digest exit=$md_status json exit=$json_status"
+          if [ "$md_status" -ne 0 ] && [ "$json_status" -ne 0 ]; then
+            echo "::warning::Every source failed; keeping the previous digest."
+            git checkout -- data 2>/dev/null || true
+          fi
+
+      - name: Upload digest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hackathon-digest
+          path: hackathon-scraper/data/
+          if-no-files-found: warn
+
+      - name: Commit refreshed digest
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hackathon-scraper/data
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh hackathon digest"
+            git push
+          fi
